@@ -13,12 +13,12 @@ namespace AlgorithmsIlluminated
 
             try
             {
-                var result = BasicAlgorithmsHelper.CalculateKaratsubaMultiplication(numbers[0], numbers[1]);
+                var result = KaratsubaMultiplication.Calculate(numbers[0], numbers[1]);
                 Console.WriteLine($"Result is {result}.");
             }
             catch (ArgumentException ex)
             {
-                Console.WriteLine($"Exception ccurred: {ex.Message}.");
+                Console.WriteLine($"Exception occurred: {ex.Message}.");
             }
             finally
             {
