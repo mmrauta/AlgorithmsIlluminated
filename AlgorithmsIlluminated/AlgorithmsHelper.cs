@@ -30,7 +30,7 @@ namespace AlgorithmsIlluminated
         /// <returns>String with even amount of digits.</returns>
         public static string GetEvenDigitsNumber(string number)
         {
-            if (!number.All(char.IsNumber))
+            if (!number.All(char.IsNumber) || string.IsNullOrEmpty(number))
             {
                 throw new ArgumentException("Provided value is not a number");
             }
