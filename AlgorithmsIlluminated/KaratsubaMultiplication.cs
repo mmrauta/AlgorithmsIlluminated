@@ -12,31 +12,33 @@ namespace AlgorithmsIlluminated
         /// <returns>Multiplication result</returns>
         public static int Calculate(string x, string y)
         {
-            var (numberOne, numberTwo) = GetNumberRepresentations(x, y);
-            var result = CalculateStep(numberOne, numberTwo);
+            AlgorithmsHelper.EnsureNumber(x);
+            AlgorithmsHelper.EnsureNumber(y);
+
+            var result = CalculateStep(x, y);
             return result;
         }
 
-        private static (string numberOne, string numberTwo) GetNumberRepresentations(string x, string y)
+        private static (string numberOne, string numberTwo, int length) GetNumberRepresentations(string x, string y)
         {
             var firstNumber = AlgorithmsHelper.GetEvenDigitsNumber(x);
             var secondNumber = AlgorithmsHelper.GetEvenDigitsNumber(y);
 
-            return AlgorithmsHelper.GetTheSameLengthNumbers(firstNumber, secondNumber);
+            var (first, second) = AlgorithmsHelper.GetTheSameLengthNumbers(firstNumber, secondNumber);
+            return (first, second, first.Length);
         }
 
         private static int CalculateStep(string x, string y)
         {
-            var (xMatchingLength, yMatchingLength) = AlgorithmsHelper.GetTheSameLengthNumbers(x, y);
-            var numberLength = xMatchingLength.Length;
-
-            if (numberLength == 1)
+            if (x.Length == 1 && y.Length == 1)
             {
                 return int.Parse(x) * int.Parse(y);
             }
 
-            var (a, b) = xMatchingLength.SplitHalf();
-            var (c, d) = yMatchingLength.SplitHalf();
+            var (xEvenLength, yEvenLength, numbersLength) = GetNumberRepresentations(x, y);
+
+            var (a, b) = xEvenLength.SplitHalf();
+            var (c, d) = yEvenLength.SplitHalf();
 
             var p = GetSum(a, b);
             var q = GetSum(c, d);
@@ -47,7 +49,7 @@ namespace AlgorithmsIlluminated
 
             var adbc = pq - ac - bd;
 
-            var result = Math.Pow(10, numberLength) * ac + Math.Pow(10, numberLength / 2) * adbc + bd;
+            var result = Math.Pow(10, numbersLength) * ac + Math.Pow(10, numbersLength / 2) * adbc + bd;
             return (int)result;
         }
 
@@ -55,7 +57,7 @@ namespace AlgorithmsIlluminated
         {
             if (text.Length % 2 != 0)
             {
-                throw new Exception("Can't split in a half number with odd number of digits!");
+                throw new ArgumentOutOfRangeException(text,"Can't split half a text with odd number of digits!");
             }
             
             var length = text.Length / 2;

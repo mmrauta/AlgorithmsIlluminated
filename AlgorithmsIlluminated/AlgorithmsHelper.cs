@@ -30,13 +30,21 @@ namespace AlgorithmsIlluminated
         /// <returns>String with even amount of digits.</returns>
         public static string GetEvenDigitsNumber(string number)
         {
+            var hasEvenNumberOfDigits = number.Length % 2 == 0;
+            return  hasEvenNumberOfDigits ? number : PrependZero(number);
+        }
+
+        /// <summary>
+        /// Ensures provided string stores number.
+        /// </summary>
+        /// <param name="number">String to test</param>
+        /// <exception cref="ArgumentException">Throws exception when string has any non numeric char</exception>
+        public static void EnsureNumber(string number)
+        {
             if (!number.All(char.IsNumber) || string.IsNullOrEmpty(number))
             {
                 throw new ArgumentException("Provided value is not a number");
             }
-
-            var hasEvenNumberOfDigits = number.Length % 2 == 0;
-            return  hasEvenNumberOfDigits ? number : PrependZero(number);
         }
 
         /// <summary>
@@ -74,11 +82,6 @@ namespace AlgorithmsIlluminated
             }
 
             return new string(x);
-        }
-
-        private static int SumTwoDigits(char digitOne, char digitTwo)
-        {
-            return CharToInt(digitOne) + CharToInt(digitTwo);
         }
 
         private static int CharToInt(char digit)

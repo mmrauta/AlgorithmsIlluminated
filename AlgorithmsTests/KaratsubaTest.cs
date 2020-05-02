@@ -37,6 +37,7 @@ namespace AlgorithmsTests
         [InlineData("25", "25", 625)]
         [InlineData("123", "123", 15129)]
         [InlineData("1234", "1000", 1234000)]
+        [InlineData("123456", "10000", 1234560000)]
         public void Multiply_Complex_Values(string firstNumber, string secondNumber, int expectedResult)
         {
             var result = KaratsubaMultiplication.Calculate(firstNumber, secondNumber);
