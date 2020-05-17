@@ -7,9 +7,9 @@ namespace AlgorithmsIlluminated
         /// <summary>
         /// Sorts the array of numbers using the Merge Sort algorithm.
         /// </summary>
-        /// <param name="numbersInput">Collection of integers.</param>
+        /// <param name="numbersInput">String storing comma separated integers.</param>
         /// <returns>Array of sorted numbers.</returns>
-        public static int[] Sort(string[] numbersInput)
+        public static int[] Sort(string numbersInput)
         {
             var numbers = GetNumbers(numbersInput);
             var result = SortStep(numbers);
@@ -32,9 +32,10 @@ namespace AlgorithmsIlluminated
             return merged;
         }
 
-        private static int[] GetNumbers(string[] numbers)
+        private static int[] GetNumbers(string numbers)
         {
             var numbersSet = numbers
+                .Split(",")
                 .Where(x => int.TryParse(x, out _))
                 .Select(int.Parse);
 

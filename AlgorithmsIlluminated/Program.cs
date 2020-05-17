@@ -13,7 +13,7 @@ namespace AlgorithmsIlluminated
             Console.WriteLine("Merge sort algorithm");
             Console.WriteLine("Please enter comma separated numbers:");
 
-            var numbers = Console.ReadLine().Split(",");
+            var numbers = Console.ReadLine();
 
             try
             {
